@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add Book and Review</title>
+</head>
+<body>
+  <a href="/books">Home</a>
+  <a href="/logout">Logout</a>
+  <form action="/books/create" method="post">
+    <fieldset>
+      <legend>Add a New Book Title and a Review:</legend>
+      Book Title: <input type="text" name="title">
+      Author:
+        <select name="author" id="">
+        {% if authors %}
+          {% for author in authors %}
+            <option value="{{author['id']}}">{{author['name']}}</option>
+          {% endfor %}
+        {% endif %}
+        </select>
+      Review: <textarea name="review" id="" cols="30" rows="5"></textarea>
+      Rating: <select name="rating" id="">
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select>
+      <input type="submit" value="Add Book and Review">
+    </fieldset>
+  </form>
+
+  <h3>Your Author not in the list? Create a new one!</h3>
+  <form action="/authors" method="post">
+    Name: <input type="text" name="name">
+    <input type="submit" value="Add Author">
+  </form>
+
+</body>
+</html>

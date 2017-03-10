@@ -17,12 +17,16 @@ from system.core.router import routes
     The automatically generated routes respond to all of the http verbs (GET, POST, PUT, PATCH, DELETE)
 """
 routes['default_controller'] = 'Users'
+# routes['GET']['/users'] = 'Users#index'
 routes['POST']['/users'] = 'Users#create'
 routes['POST']['/login'] = 'Users#login'
 routes['GET']['/logout'] = 'Users#logout'
+routes['POST']['/authors'] = 'Books#create_author'
 
 routes['GET']['/books'] = 'Books#index'
-
+routes['GET']['/books/new'] = 'Books#new'
+routes['POST']['/books/create'] = 'Books#create'
+routes['GET']['/books/<id>'] = 'Books#show'
 """
     You can add routes and specify their handlers as follows:
 

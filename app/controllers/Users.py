@@ -6,8 +6,8 @@ class Users(Controller):
         self.load_model('User')
 
     def index(self):
-        if session:
-            return redirect('/books')
+        # if session:
+        #     return redirect('/books')
         return self.load_view('users/index.html')
 
     def create(self):
