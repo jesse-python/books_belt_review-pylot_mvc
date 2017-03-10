@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login/Register</title>
+</head>
+<body>
+  <h1>Welcome!</h1>
+  <form action="/users" method="post">
+    <fieldset>
+      <legend>Register</legend>
+      Name: <input type="text" name="name">
+      Alias: <input type="text" name="alias">
+      Email: <input type="text" name="email">
+      Password: <input type="password" name="password">
+      Confirm PW: <input type="password" name="pw_confirmation">
+      <input type="submit" value="Register">
+    </fieldset>
+  </form>
+
+  <form action="/login" method="post">
+    <fieldset>
+      <legend>Login</legend>
+      Email: <input type="email" name="email">
+      Password: <input type="password" name="password">
+      <input type="submit" value="Login">
+    </fieldset>
+  </form>
+</body>
+</html>
