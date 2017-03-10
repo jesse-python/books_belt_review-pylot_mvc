@@ -6,6 +6,8 @@ class Users(Controller):
         self.load_model('User')
 
     def index(self):
+        if session:
+            return redirect('/books')
         return self.load_view('users/index.html')
 
     def create(self):
@@ -46,3 +48,9 @@ class Users(Controller):
             for message in login_status['errors']:
                 flash(message, 'login_errors')
             return redirect('/')
+
+    def logout(self):
+        session.pop('name')
+        session.pop('id')
+        flash("You are now logged out", 'logout')
+        return redirect('/')

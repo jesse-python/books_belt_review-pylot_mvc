@@ -36,14 +36,9 @@ class User(Model):
             password = info['password']
             hashed_pw = self.bcrypt.generate_password_hash(password)
 
-            # create_query = "INSERT INTO users (name, alias, email, password, created_at, updated_at) VALUES (%s, %s, %s, %s, NOW(), NOW())"
-            # create_data = [info['name'], info['alias'], info['email'], hashed_pw]
             create_query = "INSERT INTO users (name, alias, email, password, created_at, updated_at) VALUES ('{}','{}','{}','{}',NOW(),NOW())".format(info['name'], info['alias'], info['email'],hashed_pw)
 
-
             self.db.query_db(create_query)
-            # print "query worked"
-
             get_user_query = "SELECT * FROM users ORDER BY id DESC LIMIT 1"
             users = self.db.query_db(get_user_query)
             return {"status": True, "user": users[0]}
