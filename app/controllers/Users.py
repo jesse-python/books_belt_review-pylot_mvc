@@ -25,7 +25,7 @@ class Users(Controller):
             session['id'] = create_status['user']['id']
             session['name'] = create_status['user']['name']
             print "user now in session"
-            # return redirect('/books')
+            return redirect('/books')
         else:
             for message in create_status['errors']:
                 print "errors working"

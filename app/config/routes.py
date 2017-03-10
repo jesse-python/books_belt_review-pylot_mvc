@@ -19,6 +19,8 @@ from system.core.router import routes
 routes['default_controller'] = 'Users'
 routes['POST']['/users'] = 'Users#create'
 
+routes['GET']['/books'] = 'Books#index'
+
 """
     You can add routes and specify their handlers as follows:
 
