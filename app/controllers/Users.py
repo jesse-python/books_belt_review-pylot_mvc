@@ -18,16 +18,31 @@ class Users(Controller):
             "pw_confirmation": request.form['pw_confirmation'],
         }
 
-        print user_info
-
         create_status = self.models['User'].create_user(user_info)
         if create_status['status'] == True:
             session['id'] = create_status['user']['id']
             session['name'] = create_status['user']['name']
-            print "user now in session"
+            # print "user now in session"
             return redirect('/books')
         else:
             for message in create_status['errors']:
                 print "errors working"
                 flash(message, 'regis_errors')
+            return redirect('/')
+
+    def login(self):
+
+        user_info = {
+            "email": request.form['email'],
+            "password": request.form['password']
+        }
+
+        login_status = self.models['User'].login_user(user_info)
+        if login_status['status'] == True:
+            session['id'] = login_status['user']['id']
+            session['name'] = login_status['user']['name']
+            return redirect('/books')
+        else:
+            for message in login_status['errors']:
+                flash(message, 'login_errors')
             return redirect('/')

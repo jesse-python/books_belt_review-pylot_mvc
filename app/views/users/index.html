@@ -31,6 +31,16 @@
     </fieldset>
   </form>
 
+  {% with messages = get_flashed_messages(category_filter=['login_errors']) %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
   <form action="/login" method="post">
     <fieldset>
       <legend>Login</legend>

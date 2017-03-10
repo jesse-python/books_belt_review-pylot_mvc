@@ -42,18 +42,35 @@ class User(Model):
 
 
             self.db.query_db(create_query)
-            print "query worked"
+            # print "query worked"
 
             get_user_query = "SELECT * FROM users ORDER BY id DESC LIMIT 1"
             users = self.db.query_db(get_user_query)
             return {"status": True, "user": users[0]}
 
-    # def login_user(self, info):
-    #     password = info['password']
-    #     user_query = "SELECT * FROM users WHERE email = %s LIMIT 1"
-    #     user_data = [info['email']]
-    #     users = self.db.query_db(user_query, user_data)
-    #     if users[0]:
-    #         if self.bcrypt.check_password_hash(users[0]['password'], password):
-    #             return users[0]
-    #     return False
+    def login_user(self, info):
+
+        errors = []
+
+        if not info['email']:
+            errors.append('Email must not be empty')
+
+        if not info['password']:
+            errors.append('Password must not be empty')
+
+        if not errors:
+            password = info['password']
+            user_query = "SELECT * FROM users WHERE email = '{}' LIMIT 1".format(info['email'])
+            users = self.db.query_db(user_query)
+            print users
+            if len(users) >= 1:
+                if self.bcrypt.check_password_hash(users[0]['password'], password):
+                    return {'status': True, "user": users[0]}
+                else:
+                    errors.append('Password does not match, please try again.')
+                    return {'status': False, "errors": errors}
+            else:
+                errors.append('Email may be incorrect, please try again.')
+                return {'status': False, "errors": errors}
+        else:
+            return {'status': False, "errors": errors}
