@@ -54,3 +54,10 @@ class Users(Controller):
         session.pop('id')
         flash("You are now logged out", 'logout')
         return redirect('/')
+
+    def show(self, id):
+
+        data = self.models['User'].show_user(id)
+
+        
+        return self.load_view('users/show.html', user=data['user'], reviews=data['reviews'])

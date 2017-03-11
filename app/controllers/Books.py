@@ -30,10 +30,30 @@ class Books(Controller):
         bookid = self.models['Book'].create(info)
 
         print bookid
-        return redirect('/books/'+str(bookid)+'/')
+        return redirect('/books/'+str(bookid))
 
     def show(self, id):
 
         data = self.models['Book'].show_book(id)
 
         return self.load_view('books/show.html', book=data['book'], reviews=data['reviews'])
+
+    def create_review(self):
+        print request.form
+
+        info = {
+            "content": request.form['content'],
+            "rating": request.form['rating'],
+            "book_id": request.form['book_id'],
+            "user_id": session['id'],
+        }
+
+        self.models['Book'].create_review(info)
+
+        return redirect('/books/'+str(request.form['book_id']))
+
+    # def delete_review(self, id):
+    #
+    #     self.models['Book'].delete_review(id)
+    #
+    #     return redirect('/books/'+str(request.form['book_id']))

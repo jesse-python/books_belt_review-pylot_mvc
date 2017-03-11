@@ -21,12 +21,14 @@ routes['default_controller'] = 'Users'
 routes['POST']['/users'] = 'Users#create'
 routes['POST']['/login'] = 'Users#login'
 routes['GET']['/logout'] = 'Users#logout'
-routes['POST']['/authors'] = 'Books#create_author'
+routes['GET']['/users/<id>'] = 'Users#show'
 
 routes['GET']['/books'] = 'Books#index'
 routes['GET']['/books/new'] = 'Books#new'
 routes['POST']['/books/create'] = 'Books#create'
 routes['GET']['/books/<id>'] = 'Books#show'
+routes['POST']['/authors'] = 'Books#create_author'
+routes['POST']['/reviews'] = 'Books#create_review'
 """
     You can add routes and specify their handlers as follows:
 

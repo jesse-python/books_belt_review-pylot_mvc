@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{user['alias']}}'s Profile</title>
+</head>
+<body>
+  <a href="/books">Home</a>
+  <a href="/books/new">Add Book and Review</a>
+  <a href="/logout">Logout</a>
+  <h1>User Alias: {{user['alias']}}</h1>
+  <h2>Name: {{user['name']}}</h2>
+  <h2>Email: {{user['email']}}</h2>
+  <h2>Total Reviews: {{user['total_reviews']}}</h2>
+
+  <h2>Posted Reviews on the following books:</h2>
+    {% if reviews %}
+      <ul>{% for review in reviews %}
+        <li><a href="/books/{{review.book_id}}">{{review.title}}</a></li>
+      {% endfor %}</ul>
+    {% endif %}
+</body>
+</html>

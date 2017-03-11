@@ -16,10 +16,25 @@
   {% for review in reviews %}
   <hr>
     <p>Rating: {{ review.rating}}</p>
-    <p>{{ review.name }} says: {{ review.content }}</p>
+    <p><a href="/users/{{review.user_id}}">{{ review.name }} </a> says: {{ review.content }}</p>
     <p>Posted on {{review.created_at}}</p>
   {% endfor %}
 
+  <form action="/reviews" method="post">
+    <fieldset>
+      <legend><h4>Add a Review:</h4></legend>
+      <input type="hidden" name="book_id" value="{{book.id}}">
+      <textarea name="content" id="" cols="30" rows="5"></textarea>
+      Rating: <select name="rating" id="">
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select>
+      <input type="submit" value="Submit Review">
+    </fieldset>
+  </form>
 
 </body>
 </html>

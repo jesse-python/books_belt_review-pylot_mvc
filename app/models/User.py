@@ -69,3 +69,13 @@ class User(Model):
                 return {'status': False, "errors": errors}
         else:
             return {'status': False, "errors": errors}
+
+    def show_user(self, id):
+
+        user_query = "SELECT users.alias, users.name, users.email, COUNT(reviews.id) as total_reviews FROM users JOIN reviews ON users.id = reviews.user_id WHERE users.id = {}".format(id)
+        users = self.db.query_db(user_query)
+
+        user_reviews_query = "SELECT DISTINCT books.title, books.id as book_id FROM reviews JOIN books ON reviews.book_id = books.id WHERE reviews.user_id = {}".format(id)
+        reviews = self.db.query_db(user_reviews_query)
+
+        return {"user": users[0], "reviews": reviews}
