@@ -6,7 +6,8 @@ class Books(Controller):
         self.load_model('Book')
 
     def index(self):
-        return self.load_view('books/index.html')
+        data = self.models['Book'].get_recent_reviews()
+        return self.load_view('books/index.html', reviews=data['reviews'], books=data['books'])
 
     def new(self):
         authors = self.models['Book'].get_authors()

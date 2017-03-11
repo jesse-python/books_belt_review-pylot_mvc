@@ -10,5 +10,22 @@
   <h1>Welcome, {{session['name']}}</h1>
   <a href="/books/new">Add Book and Review</a>
   <a href="/logout">Log Out </a>
+
+  <h2>Recent Book Reviews: </h2>
+  {% if reviews %}
+    <ul>{% for review in reviews %}
+      <li><h2><a href="/books/{{review.book_id}}">{{review.title}}</a></h2>
+        <p>Rating: {{review.rating}}</p>
+        <p><a href="/users/{{review.user_id}}">{{review.name}}</a> says: {{review.content}}</p>
+        <p>Posted on {{review.created_at}}</p>
+      </li>
+    {% endfor %}</ul>
+  {% endif %}
+
+  <h2>Other Books with Reviews: </h2>
+  {% for book in books %}
+    <p><a href="/books/{{book['id']}}">{{book.title}}</a></p>
+  {% endfor %}
+
 </body>
 </html>

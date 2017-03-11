@@ -3,6 +3,16 @@ class Book(Model):
     def __init__(self):
         super(Book, self).__init__()
 
+    def get_recent_reviews(self):
+        reviews_query = "SELECT reviews.id as review_id, reviews.content, reviews.rating, books.title, books.id as book_id, users.id as user_id, reviews.created_at, users.name  FROM reviews JOIN users ON reviews.user_id = users.id JOIN books ON reviews.book_id = books.id ORDER BY reviews.created_at DESC LIMIT 3;"
+        reviews = self.db.query_db(reviews_query)
+
+        books_query = "SELECT DISTINCT books.title, books.id FROM books JOIN reviews ON books.id = reviews.book_id"
+        books = self.db.query_db(books_query)
+
+        print books
+        return {"reviews": reviews, "books": books}
+
     def get_authors(self):
         authors_query = "SELECT * FROM authors"
         authors = self.db.query_db(authors_query)
