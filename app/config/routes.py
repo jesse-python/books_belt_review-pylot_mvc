@@ -29,6 +29,7 @@ routes['POST']['/books/create'] = 'Books#create'
 routes['GET']['/books/<id>'] = 'Books#show'
 routes['POST']['/authors'] = 'Books#create_author'
 routes['POST']['/reviews'] = 'Books#create_review'
+routes['POST']['/reviews/<id>'] = 'Books#destroy_review'
 """
     You can add routes and specify their handlers as follows:
 

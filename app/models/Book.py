@@ -33,7 +33,7 @@ class Book(Model):
         books = self.db.query_db(get_book_query)
         currbook_id = books[0]['id']
 
-        get_reviews = "SELECT reviews.content, reviews.id, reviews.created_at, reviews.rating, users.name, users.id AS user_id FROM reviews JOIN books ON reviews.book_id = books.id JOIN users ON reviews.user_id = users.id WHERE books.id = {}".format(currbook_id)
+        get_reviews = "SELECT reviews.content, reviews.id, reviews.created_at, reviews.rating, reviews.user_id, users.name, users.id AS user_id FROM reviews JOIN books ON reviews.book_id = books.id JOIN users ON reviews.user_id = users.id WHERE books.id = {}".format(currbook_id)
         reviews = self.db.query_db(get_reviews)
 
         return {"book": books[0], "reviews":reviews}
@@ -43,7 +43,7 @@ class Book(Model):
         review_query = "INSERT INTO reviews (content, rating, user_id, book_id, created_at, updated_at) VALUES ('{}','{}','{}','{}', NOW(), NOW())".format(info['content'], info['rating'], info['user_id'], info['book_id'])
         self.db.query_db(review_query)
 
-    # def delete_review(self, id):
-    #
-    #     review_query = "DELETE FROM reviews WHERE id = {}".format(id)
-    #     self.db.query_db(review_query)
+    def delete_review(self, id):
+
+        review_query = "DELETE FROM reviews WHERE id = {}".format(id)
+        self.db.query_db(review_query)

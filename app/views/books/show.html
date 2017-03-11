@@ -18,6 +18,12 @@
     <p>Rating: {{ review.rating}}</p>
     <p><a href="/users/{{review.user_id}}">{{ review.name }} </a> says: {{ review.content }}</p>
     <p>Posted on {{review.created_at}}</p>
+    {% if review.user_id == session['id'] %}
+      <form action="/reviews/{{review.id}}" method="POST">
+        <input type="hidden" name="book_id" value="{{book.id}}">
+        <input type="submit" value="Delete this Review">
+      </form>
+    {% endif %}
   {% endfor %}
 
   <form action="/reviews" method="post">

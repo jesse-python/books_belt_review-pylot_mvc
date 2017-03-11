@@ -52,8 +52,8 @@ class Books(Controller):
 
         return redirect('/books/'+str(request.form['book_id']))
 
-    # def delete_review(self, id):
-    #
-    #     self.models['Book'].delete_review(id)
-    #
-    #     return redirect('/books/'+str(request.form['book_id']))
+    def destroy_review(self, id):
+
+        self.models['Book'].delete_review(id)
+
+        return redirect('/books/'+str(request.form['book_id']))
